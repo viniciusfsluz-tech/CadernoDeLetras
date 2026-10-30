@@ -23,7 +23,9 @@ Trabalhos individuais:
 - trabalho8.html: O Artigo Primeiro e a igualdade humana.
 - trabalho9.html: O Diário de Anne Frank.
 - trabalho10.html: O Peso da Mão de Deus.
-
+- trabalho11.html: Insônia….
+- trabalho12.html: Um Homem Azarado.
+- trabalho13.html: Os 5 Corpos do Ser Humano.
 
 Os arquivos de estilo ficam em css/style.css e o JavaScript em js/main.js.
 Os textos podem ser revisados e novos trabalhos adicionados às páginas de categoria.
