@@ -1,0 +1,147 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resenhas literárias com opiniões, avaliações, resumos e recomendações de livros.">
+    <title>Resenhas literárias | Caderno de Letras</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body id="topo">
+    <header>
+        <div class="header-inner">
+            <a class="brand" href="index.html">Caderno<span> de Letras</span></a>
+            <p class="tagline">Leituras, ideias e produções escolares</p>
+
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="index.html">Início</a>
+                <a href="conto.html">Conto</a>
+                <a href="resenha.html" aria-current="page">Resenha literária</a>
+                <a href="cordel.html">Cordel</a>
+                <a href="apresentacoes.html">Apresentação e entrevista</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <a class="back-link" href="index.html">← Voltar às categorias</a>
+
+        <section class="category-heading">
+            <div class="eyebrow">Gênero textual · Leitura crítica</div>
+            <h1>Resenhas literárias</h1>
+            <p>Opiniões, avaliações e recomendações de livros. Esta seção poderá receber resenhas de todos os integrantes do grupo.</p>
+        </section>
+
+        <section class="category-works">
+            <div class="section-topline">
+                <div>
+                    <div class="eyebrow">Acervo atual</div>
+                    <h2 class="section-heading">Trabalhos nesta categoria</h2>
+                </div>
+
+                <span class="work-count">4 trabalhos</span>
+            </div>
+
+            <!-- Busca de resenhas -->
+            <div class="search-wrap">
+                <label for="busca-trabalhos">Buscar uma resenha</label>
+                <input
+                    type="search"
+                    id="busca-trabalhos"
+                    placeholder="Digite o título ou uma palavra da resenha..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="cards">
+
+                <!-- TRABALHO 02 -->
+                <article class="card" data-trabalho>
+                    <img
+                        class="work-thumbnail"
+                        src="imagens/resenhas/O misterio de Henri Pick.jpeg"
+                        alt="Capa do livro O Mistério de Henri Pick"
+                        loading="lazy"
+                    >
+
+                    <div class="card-number">TRABALHO 02 · Resenha literária · ⭐⭐⭐⭐⭐</div>
+                    <h3>O Mistério de Henri Pick</h3>
+                    <p>Uma resenha sobre mistério, investigação, autoria e as reviravoltas do livro de David Foenkinos.</p>
+                    <a class="read-more" href="trabalho2.html">Ler trabalho completo →</a>
+                </article>
+
+                <!-- TRABALHO 07 -->
+                <article class="card" data-trabalho>
+                    <img
+                        class="work-thumbnail"
+                        src="imagens/resenhas/Hamlet.png"
+                        alt="Capa da obra Hamlet, de William Shakespeare"
+                        loading="lazy"
+                    >
+
+                    <div class="card-number">TRABALHO 07 · Resenha literária · ⭐⭐⭐⭐⭐</div>
+                    <h3>Hamlet</h3>
+                    <p>Uma avaliação pessoal da tragédia de William Shakespeare, com resumo e trechos marcantes.</p>
+                    <a class="read-more" href="trabalho7.html">Ler trabalho completo →</a>
+                </article>
+
+                <!-- TRABALHO 09 -->
+                <article class="card" data-trabalho>
+                    <img
+                        class="work-thumbnail"
+                        src="imagens/resenhas/O Diario de Anne Frank.png"
+                        alt="Capa do livro O Diário de Anne Frank"
+                        loading="lazy"
+                    >
+
+                    <div class="card-number">TRABALHO 09 · Resenha literária · ⭐⭐⭐⭐⭐</div>
+                    <h3>O Diário de Anne Frank</h3>
+                    <p>Uma reflexão sobre a Segunda Guerra Mundial, a perseguição aos judeus e a importância de aprender com a história.</p>
+                    <a class="read-more" href="trabalho9.html">Ler trabalho completo →</a>
+                </article>
+
+                <!-- TRABALHO 13 -->
+                <article class="card" data-trabalho>
+                    <img
+                        class="work-thumbnail"
+                        src="imagens/resenhas/Os 5 Corpos Do Ser Humano.png"
+                        alt="Capa ou ilustração do livro Os 5 Corpos do Ser Humano"
+                        loading="lazy"
+                    >
+
+                    <div class="card-number">TRABALHO 13 · Resenha literária · ⭐⭐⭐⭐⭐</div>
+                    <h3>Os 5 Corpos do Ser Humano</h3>
+                    <p>Uma resenha sobre o livro de Junji Miyaura, com reflexões sobre autoconhecimento, espiritualidade e contato com a natureza.</p>
+                    <a class="read-more" href="trabalho13.html">Ler trabalho completo →</a>
+                </article>
+
+            </div>
+
+            <!-- Mensagem exibida quando não há resultados -->
+            <p
+                id="sem-resultados"
+                class="empty-state"
+                role="status"
+                aria-live="polite"
+                hidden
+            >
+                Nenhuma resenha foi encontrada.
+                Tente pesquisar por outro título ou palavra.
+            </p>
+
+            <p class="future-note">Mais trabalhos desta categoria poderão ser adicionados aqui.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Caderno de Letras</strong> · Portfólio de Língua Portuguesa</p>
+        <p><a href="#topo">Voltar ao topo ↑</a></p>
+    </footer>
+</body>
+</html>

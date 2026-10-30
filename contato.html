@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Entre em contato com o projeto Caderno de Letras e confira a localização do IFSP Campus Cubatão."
+    >
+
+    <title>Contato — Caderno de Letras</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body id="topo">
+
+    <header>
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                Caderno<span> de Letras</span>
+            </a>
+
+            <p class="tagline">Leituras, ideias e produções escolares</p>
+
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="index.html">Início</a>
+                <a href="conto.html">Conto</a>
+                <a href="resenha.html">Resenha literária</a>
+                <a href="cordel.html">Cordel</a>
+                <a href="apresentacoes.html">Apresentação e entrevista</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html" aria-current="page">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="category-heading">
+            <div class="eyebrow">Fale com o projeto</div>
+
+            <h1>Contato</h1>
+
+            <p>
+                Conheça nossos canais de contato demonstrativos e veja onde
+                o projeto Caderno de Letras foi desenvolvido.
+            </p>
+        </section>
+
+        <section class="contact-layout">
+
+            <div class="article-body">
+                <h2>Envie uma mensagem demonstrativa</h2>
+
+                <p>
+                    Este formulário foi criado para demonstrar a organização
+                    de campos e a interação com JavaScript. Ele não envia
+                    mensagens de verdade.
+                </p>
+
+                <form id="form-contato" class="contact-form">
+                    <div class="form-field">
+                        <label for="nome">Nome fictício</label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Ex.: Estudante"
+                            required
+                            maxlength="80"
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label for="assunto">Assunto</label>
+
+                        <select id="assunto" name="assunto" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="projeto">Sobre o projeto</option>
+                            <option value="trabalhos">Trabalhos escolares</option>
+                            <option value="sugestao">Sugestão fictícia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="mensagem">Mensagem fictícia</label>
+
+                        <textarea
+                            id="mensagem"
+                            name="mensagem"
+                            rows="5"
+                            placeholder="Escreva uma mensagem de exemplo..."
+                            required
+                            maxlength="1000"
+                        ></textarea>
+                    </div>
+
+                    <button class="button" type="submit">
+                        Simular envio
+                    </button>
+
+                    <p
+                        id="resultado-contato"
+                        class="form-feedback"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></p>
+                </form>
+            </div>
+
+            <aside class="notice contact-warning">
+                <h2>Informações de contato</h2>
+
+                <p>
+                    <strong>Projeto:</strong><br>
+                    Caderno de Letras
+                </p>
+
+                <p>
+                    <strong>E-mail demonstrativo:</strong><br>
+                    contato@cadernodeletras.example
+                </p>
+
+                <p>
+                    <strong>Instituição de ensino:</strong><br>
+                    Instituto Federal de São Paulo (IFSP) — Campus Cubatão
+                </p>
+
+                <p>
+                    <strong>Curso:</strong><br>
+                    Técnico em Informática Integrado ao Ensino Médio
+                </p>
+
+                <p>
+                    <strong>Turma:</strong><br>
+                    148
+                </p>
+
+                <p class="contact-disclaimer">
+                    Este é um contato fictício, criado exclusivamente para
+                    fins acadêmicos. O endereço de e-mail apresentado é
+                    demonstrativo e não deve ser utilizado para envio de
+                    mensagens reais.
+                </p>
+            </aside>
+
+        </section>
+
+        <section class="map-section">
+            <div class="category-heading">
+                <div class="eyebrow">Onde o projeto foi desenvolvido</div>
+
+                <h2>Encontre nossa instituição</h2>
+
+                <p>
+                    O Caderno de Letras foi desenvolvido por alunos do
+                    IFSP — Campus Cubatão. Confira a localização da
+                    instituição no mapa abaixo.
+                </p>
+            </div>
+
+            <div class="map-card">
+                <div class="map-information">
+                    <h3>IFSP — Campus Cubatão</h3>
+
+                    <p>
+                        Rua Maria Cristina, 50 — Jardim Casqueiro,
+                        Cubatão — SP, CEP 11533-160.
+                    </p>
+
+                    <a
+                        class="button secondary"
+                        href="https://www.google.com/maps/search/?api=1&query=Instituto+Federal+de+S%C3%A3o+Paulo+Campus+Cubat%C3%A3o"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Abrir no Google Maps
+                    </a>
+                </div>
+
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps?q=IFSP%20Campus%20Cubat%C3%A3o%2C%20Cubat%C3%A3o%2C%20SP&output=embed"
+                            title="Mapa do IFSP Campus Cubatão"
+                            width="100%"
+                            height="380"
+                            style="border: 0;"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <strong>Caderno de Letras</strong> · Portfólio de Língua Portuguesa
+        </p>
+
+        <p>Projeto escolar para fins acadêmicos.</p>
+
+        <p><a href="#topo">Voltar ao topo ↑</a></p>
+    </footer>
+
+</body>
+</html>
