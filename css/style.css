@@ -1583,3 +1583,45 @@ select:focus-visible {
     }
 }
 
+/* VÍDEO DA APRESENTAÇÃO */
+
+.video-section {
+    margin-top: 48px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+}
+
+.video-section h2 {
+    margin: 10px 0 14px;
+    color: var(--text);
+    font-family: var(--serif);
+}
+
+.video-section > p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 24px 0 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+}
+
+.video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-link {
+    font-size: 0.92rem;
+}
+
