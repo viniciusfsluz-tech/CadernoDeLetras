@@ -8,6 +8,7 @@
     <title>Cordéis e poemas | Caderno de Letras</title>
 
     <link rel="stylesheet" href="css/style.css">
+        <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -46,12 +47,15 @@
                     <h2 class="section-heading">Trabalhos nesta categoria</h2>
                 </div>
 
-                <span class="work-count">4 trabalhos</span>
+                <span class="work-count" id="total-trabalhos-categoria">
+                    4 trabalhos
+                </span>
             </div>
 
             <!-- Busca de cordéis e poemas -->
             <div class="search-wrap">
                 <label for="busca-trabalhos">Buscar um cordel ou poema</label>
+
                 <input
                     type="search"
                     id="busca-trabalhos"
@@ -60,69 +64,8 @@
                 >
             </div>
 
-            <div class="cards">
-
-                <!-- TRABALHO 03 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/cordel/Cordel_Artigo19.jpg"
-                        alt="Ilustração do cordel A Voz do Povo e o Artigo 19"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 03 · Poema em versos · Liberdade de expressão</div>
-                    <h3>A Voz do Povo e o Artigo 19</h3>
-                    <p>Versos sobre liberdade de expressão, respeito, informação e responsabilidade no uso da própria voz.</p>
-                    <a class="read-more" href="trabalho3.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 06 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail imagem-cordel18"
-                        src="imagens/cordel/Cordel_Artigo18.jpg"
-                        alt="Cordel sobre o Artigo 18"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 06 · Cordel e poesia</div>
-                    <h3>O direito de crer</h3>
-                    <p>Poema sobre liberdade religiosa, perseguição e o respeito à crença de cada pessoa.</p>
-                    <a class="read-more" href="trabalho6.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 08 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/cordel/Cordel_Artigo28.png"
-                        alt="Ilustração do cordel sobre igualdade e direitos humanos"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 08 · Cordel · Igualdade e direitos humanos</div>
-                    <h3>O Artigo Primeiro e a igualdade humana</h3>
-                    <p>Versos inspirados no princípio de que todos os seres humanos nascem livres e iguais em dignidade e direitos.</p>
-                    <a class="read-more" href="trabalho8.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 12 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/cordel/Um Homem Azarado_ Sobrevivendo à Tempestade.png"
-                        alt="Ilustração do cordel sobre o artigo 3 dos direitos humanos"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 12 · Cordel · Humor</div>
-                    <h3>Um Homem Azarado</h3>
-                    <p>Um cordel bem-humorado que acompanha uma sequência de desventuras e termina com uma surpresa.</p>
-                    <a class="read-more" href="trabalho12.html">Ler trabalho completo →</a>
-                </article>
-
-            </div>
+            <!-- Trabalhos gerados automaticamente -->
+            <div class="cards" id="lista-trabalhos-categoria"></div>
 
             <!-- Mensagem exibida quando não há resultados -->
             <p
@@ -136,7 +79,9 @@
                 Tente pesquisar por outro título ou palavra.
             </p>
 
-            <p class="future-note">Mais trabalhos desta categoria poderão ser adicionados aqui.</p>
+            <p class="future-note">
+                Mais trabalhos desta categoria poderão ser adicionados aqui.
+            </p>
         </section>
     </main>
 

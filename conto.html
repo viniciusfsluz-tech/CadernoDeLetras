@@ -7,6 +7,7 @@
     <meta name="description" content="Histórias narrativas reunidas em um só lugar. Aqui ficarão os contos produzidos por você e pelos integrantes do grupo.">
     <title>Contos | Caderno de Letras</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -45,79 +46,24 @@
                     <h2 class="section-heading">Trabalhos nesta categoria</h2>
                 </div>
 
-                <span class="work-count">4 trabalhos</span>
-                <!-- Campo de busca dos trabalhos -->
-                <div class="search-wrap">
-                    <label for="busca-trabalhos">Buscar um conto</label>
-
-                    <input
-                        type="search"
-                        id="busca-trabalhos"
-                        placeholder="Digite o título ou uma palavra do conto..."
-                        autocomplete="off"
-                    >
-                </div>
+                <span class="work-count" id="total-trabalhos-categoria">
+                    4 trabalhos
+                </span>
             </div>
 
-            <div class="cards">
+            <div class="search-wrap">
+                <label for="busca-trabalhos">Buscar um conto</label>
 
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/contos/Os retalhos de uma alma quebrada.png"
-                        alt="Ilustração de Os retalhos de uma alma quebrada"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 01 · Conto de terror e suspense</div>
-                    <h3>Os retalhos de uma alma quebrada</h3>
-                    <p>Uma narrativa sombria marcada por memórias, culpa, aparições e o mistério do Espreitador.</p>
-                    <a class="read-more" href="trabalho1.html">Ler trabalho completo →</a>
-                </article>
-
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/contos/Hibisco Roxo a visao de Jaja.jpeg"
-                        alt="Ilustração de Hibisco Roxo: a visão de Jaja"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 05 · Conto</div>
-                    <h3>Hibisco Roxo: a visão de Jaja</h3>
-                    <p>Uma narrativa pela perspectiva de Jaja, marcada pela pressão familiar e pelo medo de decepcionar o pai.</p>
-                    <a class="read-more" href="trabalho5.html">Ler trabalho completo →</a>
-                </article>
-
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/contos/O_Peso_da_Mao_de_Deus.jpeg"
-                        alt="Ilustração de O Peso da Mão de Deus"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 10 · Conto inspirado em Hibisco Roxo</div>
-                    <h3>O Peso da Mão de Deus</h3>
-                    <p>Uma narrativa pela perspectiva de Eugene Achike, que confronta sua própria rigidez, os danos causados à família e a possibilidade de recomeçar.</p>
-                    <a class="read-more" href="trabalho10.html">Ler trabalho completo →</a>
-                </article>
-
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/contos/Insônia_ Fragmentos de um Viajante.png"
-                        alt="Capa do conto Insônia"
-                        loading="lazy"
-                    >
-                    
-                    <div class="card-number">TRABALHO 11 · Conto</div>
-                    <h3>Insônia…</h3>
-                    <p>Uma narrativa sobre Eugene Achike, a exaustão, a perda da família e um encontro inesperado com Tyler.</p>
-                    <a class="read-more" href="trabalho11.html">Ler trabalho completo →</a>
-                </article>
-
+                <input
+                    type="search"
+                    id="busca-trabalhos"
+                    placeholder="Digite o título ou uma palavra do conto..."
+                    autocomplete="off"
+                >
             </div>
+
+            <div class="cards" id="lista-trabalhos-categoria"></div>
+
             <p
                 id="sem-resultados"
                 class="empty-state"
@@ -128,7 +74,10 @@
                 Nenhum conto foi encontrado.
                 Tente pesquisar por outro título ou palavra.
             </p>
-            <p class="future-note">Mais trabalhos desta categoria poderão ser adicionados aqui.</p>
+
+            <p class="future-note">
+                Mais trabalhos desta categoria poderão ser adicionados aqui.
+            </p>
         </section>
     </main>
 

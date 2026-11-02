@@ -8,6 +8,7 @@
     <title>Resenhas literárias | Caderno de Letras</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -46,12 +47,15 @@
                     <h2 class="section-heading">Trabalhos nesta categoria</h2>
                 </div>
 
-                <span class="work-count">4 trabalhos</span>
+                <span class="work-count" id="total-trabalhos-categoria">
+                    4 trabalhos
+                </span>
             </div>
 
             <!-- Busca de resenhas -->
             <div class="search-wrap">
                 <label for="busca-trabalhos">Buscar uma resenha</label>
+
                 <input
                     type="search"
                     id="busca-trabalhos"
@@ -60,69 +64,8 @@
                 >
             </div>
 
-            <div class="cards">
-
-                <!-- TRABALHO 02 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/resenhas/O misterio de Henri Pick.jpeg"
-                        alt="Capa do livro O Mistério de Henri Pick"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 02 · Resenha literária · ⭐⭐⭐⭐⭐</div>
-                    <h3>O Mistério de Henri Pick</h3>
-                    <p>Uma resenha sobre mistério, investigação, autoria e as reviravoltas do livro de David Foenkinos.</p>
-                    <a class="read-more" href="trabalho2.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 07 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/resenhas/Hamlet.png"
-                        alt="Capa da obra Hamlet, de William Shakespeare"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 07 · Resenha literária · ⭐⭐⭐⭐⭐</div>
-                    <h3>Hamlet</h3>
-                    <p>Uma avaliação pessoal da tragédia de William Shakespeare, com resumo e trechos marcantes.</p>
-                    <a class="read-more" href="trabalho7.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 09 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/resenhas/O Diario de Anne Frank.png"
-                        alt="Capa do livro O Diário de Anne Frank"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 09 · Resenha literária · ⭐⭐⭐⭐⭐</div>
-                    <h3>O Diário de Anne Frank</h3>
-                    <p>Uma reflexão sobre a Segunda Guerra Mundial, a perseguição aos judeus e a importância de aprender com a história.</p>
-                    <a class="read-more" href="trabalho9.html">Ler trabalho completo →</a>
-                </article>
-
-                <!-- TRABALHO 13 -->
-                <article class="card" data-trabalho>
-                    <img
-                        class="work-thumbnail"
-                        src="imagens/resenhas/Os 5 Corpos Do Ser Humano.png"
-                        alt="Capa ou ilustração do livro Os 5 Corpos do Ser Humano"
-                        loading="lazy"
-                    >
-
-                    <div class="card-number">TRABALHO 13 · Resenha literária · ⭐⭐⭐⭐⭐</div>
-                    <h3>Os 5 Corpos do Ser Humano</h3>
-                    <p>Uma resenha sobre o livro de Junji Miyaura, com reflexões sobre autoconhecimento, espiritualidade e contato com a natureza.</p>
-                    <a class="read-more" href="trabalho13.html">Ler trabalho completo →</a>
-                </article>
-
-            </div>
+            <!-- Trabalhos gerados automaticamente -->
+            <div class="cards" id="lista-trabalhos-categoria"></div>
 
             <!-- Mensagem exibida quando não há resultados -->
             <p
@@ -136,7 +79,9 @@
                 Tente pesquisar por outro título ou palavra.
             </p>
 
-            <p class="future-note">Mais trabalhos desta categoria poderão ser adicionados aqui.</p>
+            <p class="future-note">
+                Mais trabalhos desta categoria poderão ser adicionados aqui.
+            </p>
         </section>
     </main>
 

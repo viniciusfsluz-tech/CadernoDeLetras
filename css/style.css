@@ -1625,3 +1625,63 @@ select:focus-visible {
     font-size: 0.92rem;
 }
 
+/* =========================================
+   FILTROS DO ACERVO
+========================================= */
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0 28px;
+}
+
+.filter-controls select {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.filter-controls select:focus,
+.search-wrap input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.work-author,
+.work-modality {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.card-image-link {
+    display: block;
+}
+
+.card-image-link img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.empty-state[hidden] {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .filter-controls {
+        flex-direction: column;
+    }
+
+    .filter-controls select {
+        width: 100%;
+    }
+}
+

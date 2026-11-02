@@ -2,23 +2,16 @@
 /*
  * CADERNO DE LETRAS
  * Banco centralizado de produções de Língua Portuguesa.
- *
- * Cada objeto representa um trabalho do acervo.
- * Os links individuais existentes foram preservados.
  */
 
 const trabalhos = [
-
-    // ========================================
-    // TRABALHO 01 — CONTO
-    // ========================================
 
     {
         id: 1,
         titulo: "Os retalhos de uma alma quebrada",
         tipo: "conto",
         modalidade: "individual",
-        autores: ["Vinicius Ferreira"],
+        autores: ["Vinícius Ferreira"],
         grupo: null,
         data: null,
         resumo: "Uma narrativa de terror sobre Eugene, uma presença paranormal e os acontecimentos que cercam o desaparecimento do protagonista.",
@@ -31,16 +24,12 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 02 — RESENHA
-    // ========================================
-
     {
         id: 2,
         titulo: "O Mistério de Henri Pick",
         tipo: "resenha",
         modalidade: "individual",
-        autores: ["Vinicius Ferreira"],
+        autores: ["Vinícius Ferreira"],
         grupo: null,
         data: null,
         resumo: "Uma avaliação pessoal do romance de David Foenkinos, com comentários sobre os personagens, as reviravoltas e os temas da leitura.",
@@ -52,10 +41,6 @@ const trabalhos = [
         video: null,
         links: []
     },
-
-    // ========================================
-    // TRABALHO 03 — CORDEL
-    // ========================================
 
     {
         id: 3,
@@ -75,22 +60,18 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 04 — APRESENTAÇÃO E ENTREVISTA
-    // ========================================
-
     {
         id: 4,
         titulo: "O Cinema Brasileiro em comparação ao resto do mundo",
         tipo: "apresentacao",
         modalidade: "grupo",
         autores: [
-            "Vinicius Ferreira",
+            "Vinícius Ferreira",
             "Luis Gustavo",
             "Ruan Silva",
             "Gabriel Mariano"
         ],
-        grupo: null,
+        grupo: "Grupo 148",
         data: null,
         resumo: "Uma análise da indústria cinematográfica brasileira, de seus filmes marcantes, do reconhecimento internacional e das opiniões sobre o cinema nacional.",
         imagem: {
@@ -105,16 +86,12 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 05 — CONTO
-    // ========================================
-
     {
         id: 5,
         titulo: "Hibisco Roxo: a visão de Jaja",
         tipo: "conto",
         modalidade: "individual",
-        autores: [],
+        autores: ["Luis Gustavo"],
         grupo: null,
         data: null,
         resumo: "Uma narrativa sobre a pressão familiar, o medo de fracassar e as consequências de viver sob expectativas extremas.",
@@ -126,10 +103,6 @@ const trabalhos = [
         video: null,
         links: []
     },
-
-    // ========================================
-    // TRABALHO 06 — CORDEL
-    // ========================================
 
     {
         id: 6,
@@ -149,10 +122,6 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 07 — RESENHA
-    // ========================================
-
     {
         id: 7,
         titulo: "Hamlet",
@@ -170,10 +139,6 @@ const trabalhos = [
         video: null,
         links: []
     },
-
-    // ========================================
-    // TRABALHO 08 — CORDEL
-    // ========================================
 
     {
         id: 8,
@@ -193,10 +158,6 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 09 — RESENHA
-    // ========================================
-
     {
         id: 9,
         titulo: "O Diário de Anne Frank",
@@ -214,10 +175,6 @@ const trabalhos = [
         video: null,
         links: []
     },
-
-    // ========================================
-    // TRABALHO 10 — CONTO
-    // ========================================
 
     {
         id: 10,
@@ -237,16 +194,12 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 11 — CONTO
-    // ========================================
-
     {
         id: 11,
         titulo: "Insônia…",
         tipo: "conto",
-        modalidade: "não informado",
-        autores: [],
+        modalidade: "individual",
+        autores: ["Gabriel Mariano"],
         grupo: null,
         data: null,
         resumo: "Uma narrativa sobre a exaustão de Eugene Achike, sua relação com a família e um encontro inesperado durante uma viagem.",
@@ -259,16 +212,12 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 12 — CORDEL
-    // ========================================
-
     {
         id: 12,
         titulo: "Um Homem Azarado",
         tipo: "cordel",
-        modalidade: "não informado",
-        autores: [],
+        modalidade: "individual",
+        autores: ["Gabriel Mariano"],
         grupo: null,
         data: null,
         resumo: "Uma sequência de desventuras contada em versos, com um final inesperado.",
@@ -281,16 +230,12 @@ const trabalhos = [
         links: []
     },
 
-    // ========================================
-    // TRABALHO 13 — RESENHA
-    // ========================================
-
     {
         id: 13,
         titulo: "Os 5 Corpos do Ser Humano",
         tipo: "resenha",
-        modalidade: "não informado",
-        autores: [],
+        modalidade: "individual",
+        autores: ["Gabriel Mariano"],
         grupo: null,
         data: null,
         resumo: "Uma análise sobre uma obra que aborda os corpos energéticos, o autoconhecimento e a relação entre o ser humano e a natureza.",
