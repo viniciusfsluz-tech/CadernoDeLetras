@@ -12,7 +12,7 @@ const trabalhos = [
         tipo: "conto",
         modalidade: "individual",
         autores: ["Vinícius Ferreira"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma narrativa de terror sobre Eugene, uma presença paranormal e os acontecimentos que cercam o desaparecimento do protagonista.",
         imagem: {
@@ -30,7 +30,7 @@ const trabalhos = [
         tipo: "resenha",
         modalidade: "individual",
         autores: ["Vinícius Ferreira"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma avaliação pessoal do romance de David Foenkinos, com comentários sobre os personagens, as reviravoltas e os temas da leitura.",
         imagem: {
@@ -48,7 +48,7 @@ const trabalhos = [
         tipo: "cordel",
         modalidade: "individual",
         autores: ["Vinícius Ferreira"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Poema sobre liberdade de expressão, direito à informação e responsabilidade no uso da própria voz.",
         imagem: {
@@ -71,7 +71,7 @@ const trabalhos = [
             "Ruan Silva",
             "Gabriel Mariano"
         ],
-        grupo: "Grupo 148",
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma análise da indústria cinematográfica brasileira, de seus filmes marcantes, do reconhecimento internacional e das opiniões sobre o cinema nacional.",
         imagem: {
@@ -92,7 +92,7 @@ const trabalhos = [
         tipo: "conto",
         modalidade: "individual",
         autores: ["Luis Gustavo"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma narrativa sobre a pressão familiar, o medo de fracassar e as consequências de viver sob expectativas extremas.",
         imagem: {
@@ -110,7 +110,7 @@ const trabalhos = [
         tipo: "cordel",
         modalidade: "individual",
         autores: ["Luis Gustavo"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Versos sobre pessoas que sofrem perseguição por sua fé e sobre o direito de cada um escolher suas próprias crenças.",
         imagem: {
@@ -128,7 +128,7 @@ const trabalhos = [
         tipo: "resenha",
         modalidade: "individual",
         autores: ["Luis Gustavo"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma resenha pessoal sobre a experiência de leitura, a história da tragédia e os trechos que mais chamaram a atenção.",
         imagem: {
@@ -146,7 +146,7 @@ const trabalhos = [
         tipo: "cordel",
         modalidade: "individual",
         autores: ["Ruan Silva"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Um cordel inspirado no princípio de que todos os seres humanos nascem livres e iguais em dignidade e direitos.",
         imagem: {
@@ -164,7 +164,7 @@ const trabalhos = [
         tipo: "resenha",
         modalidade: "individual",
         autores: ["Ruan Silva"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma resenha sobre a experiência de Anne Frank durante a Segunda Guerra Mundial e a importância de aprender com a história.",
         imagem: {
@@ -182,7 +182,7 @@ const trabalhos = [
         tipo: "conto",
         modalidade: "individual",
         autores: ["Ruan Silva"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma narrativa sobre fé, controle, culpa e a difícil possibilidade de reconstruir os laços familiares.",
         imagem: {
@@ -200,7 +200,7 @@ const trabalhos = [
         tipo: "conto",
         modalidade: "individual",
         autores: ["Gabriel Mariano"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma narrativa sobre a exaustão de Eugene Achike, sua relação com a família e um encontro inesperado durante uma viagem.",
         imagem: {
@@ -218,7 +218,7 @@ const trabalhos = [
         tipo: "cordel",
         modalidade: "individual",
         autores: ["Gabriel Mariano"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma sequência de desventuras contada em versos, com um final inesperado.",
         imagem: {
@@ -236,7 +236,7 @@ const trabalhos = [
         tipo: "resenha",
         modalidade: "individual",
         autores: ["Gabriel Mariano"],
-        grupo: null,
+        grupo: "Royal Code",
         data: null,
         resumo: "Uma análise sobre uma obra que aborda os corpos energéticos, o autoconhecimento e a relação entre o ser humano e a natureza.",
         imagem: {
