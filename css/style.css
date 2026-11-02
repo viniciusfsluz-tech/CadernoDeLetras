@@ -1684,4 +1684,45 @@ select:focus-visible {
         width: 100%;
     }
 }
+/* ========================================
+   IMAGENS DAS PÁGINAS DOS TRABALHOS
+======================================== */
 
+.work-image {
+    margin: 28px auto 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.work-image img {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    max-height: 460px;
+    object-fit: contain;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+
+    background: var(--surface);
+}
+
+.work-image figcaption {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .work-image {
+        margin: 20px auto 26px;
+    }
+
+    .work-image img {
+        border-radius: 10px;
+    }
+}

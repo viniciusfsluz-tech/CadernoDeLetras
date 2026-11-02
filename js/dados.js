@@ -83,7 +83,13 @@ const trabalhos = [
             tipo: "youtube",
             src: "https://www.youtube-nocookie.com/embed/v1ETeHi2QSU"
         },
-        links: []
+        links: [
+    {
+        titulo: "Assistir à apresentação diretamente no YouTube",
+        url: "https://youtu.be/v1ETeHi2QSU",
+        tipo: "video"
+    }
+]
     },
 
     {
