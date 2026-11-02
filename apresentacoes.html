@@ -10,6 +10,7 @@
     <title>Apresentações e entrevistas | Caderno de Letras</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -93,82 +94,24 @@
                     <h2>Uma reportagem para explorar</h2>
                 </div>
 
-                <span class="featured-status">
+                <span class="featured-status" id="total-apresentacoes">
                     1 trabalho
                 </span>
             </div>
 
-            <article class="featured-report-card">
+            <!-- Trabalho gerado automaticamente -->
+            <div id="lista-apresentacoes"></div>
 
+            <p
+                id="sem-apresentacoes"
+                class="empty-state"
+                role="status"
+                aria-live="polite"
+                hidden
+            >
+                Nenhuma apresentação foi encontrada.
+            </p>
 
-            <div class="featured-report-visual">
-                <img
-                    src="imagens/cinema/O Cinema Brasileiro_ Nossa História.png"
-                    alt="Banner da reportagem sobre a história do cinema brasileiro"
-                    loading="lazy"
-                >
-            </div>
-
-                <div class="featured-report-content">
-
-                    <div class="featured-report-tags">
-                        <span>TRABALHO 04</span>
-                        <span>APRESENTAÇÃO E ENTREVISTA</span>
-                    </div>
-
-                    <h3 id="featured-title">
-                        O Cinema Brasileiro em comparação ao resto do mundo
-                    </h3>
-
-                    <p class="featured-report-description">
-                        Uma investigação sobre a indústria cinematográfica
-                        brasileira, os filmes que marcaram sua história,
-                        o reconhecimento internacional e os desafios
-                        enfrentados pelo cinema nacional.
-                    </p>
-
-                    <div class="featured-topics">
-                        <h4>O que você encontrará</h4>
-
-                        <ul>
-                            <li>
-                                <span>01</span>
-                                História e importância do cinema brasileiro
-                            </li>
-
-                            <li>
-                                <span>02</span>
-                                Filmes nacionais de destaque
-                            </li>
-
-                            <li>
-                                <span>03</span>
-                                Reconhecimento no cenário internacional
-                            </li>
-
-                            <li>
-                                <span>04</span>
-                                Entrevista e opiniões sobre o tema
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="featured-authors">
-                        <span class="authors-label">REALIZADO POR</span>
-
-                        <p>
-                            Vinicius Ferreira, Luis Gustavo,
-                            Ruan Silva e Gabriel Mariano
-                        </p>
-                    </div>
-
-                    <a class="featured-report-button" href="trabalho4.html">
-                        <span>Ler a reportagem completa</span>
-                        <span aria-hidden="true">→</span>
-                    </a>
-
-                </div>
-            </article>
         </section>
 
         <!-- MENSAGEM FINAL -->
