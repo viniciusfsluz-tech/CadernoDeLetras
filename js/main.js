@@ -1,488 +1,317 @@
-
 /*
- * CADERNO DE LETRAS
- * Busca de trabalhos e botão Voltar ao topo.
+ * CADERNO DE LETRAS — ROYAL CODE
+ * Interações e renderização do conteúdo de Língua Portuguesa.
  */
 
-// ========================================
-// 1. BUSCA DOS TRABALHOS
-// ========================================
+const tipoLabel = {
+    conto: 'Conto',
+    resenha: 'Resenha',
+    cordel: 'Cordel',
+    apresentacao: 'Apresentação'
+};
 
-const campoBusca = document.querySelector("#busca-trabalhos");
+const normalizar = (valor = '') => valor
+    .toLocaleLowerCase('pt-BR')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
 
-if (campoBusca) {
-    const cartoes = [
-        ...document.querySelectorAll("[data-trabalho]")
-    ];
-
-    const mensagemVazia = document.querySelector("#sem-resultados");
-    const contador = document.querySelector(".work-count");
-
-    const totalTrabalhos = cartoes.length;
-
-    campoBusca.addEventListener("input", () => {
-        const termo = campoBusca.value
-            .trim()
-            .toLocaleLowerCase("pt-BR");
-
-        let visiveis = 0;
-
-        cartoes.forEach((cartao) => {
-            const conteudo = cartao.textContent
-                .toLocaleLowerCase("pt-BR");
-
-            const corresponde = conteudo.includes(termo);
-
-            cartao.hidden = !corresponde;
-
-            if (corresponde) {
-                visiveis++;
-            }
-        });
-
-        if (mensagemVazia) {
-            mensagemVazia.hidden = visiveis !== 0;
-        }
-
-        if (contador) {
-            contador.textContent = termo === ""
-                ? `${totalTrabalhos} trabalhos`
-                : `${visiveis} de ${totalTrabalhos} trabalhos`;
-        }
-    });
+function escaparHTML(valor = '') {
+    return String(valor).replace(/[&<>"']/g, caractere => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[caractere]);
 }
 
-// ========================================
-// 2. BOTÃO VOLTAR AO TOPO
-// ========================================
-
-const botaoTopo = document.createElement("button");
-
-botaoTopo.type = "button";
-botaoTopo.className = "back-to-top";
-botaoTopo.textContent = "↑ Voltar ao topo";
-botaoTopo.setAttribute("aria-label", "Voltar ao topo da página");
-botaoTopo.hidden = true;
-
-document.body.appendChild(botaoTopo);
-
-// Mostra o botão depois que a pessoa rolar a página.
-function atualizarBotaoTopo() {
-    const alturaDocumento = document.documentElement.scrollHeight;
-    const alturaJanela = window.innerHeight;
-    const podeRolar = alturaDocumento > alturaJanela + 50;
-
-    botaoTopo.hidden = !podeRolar || window.scrollY < 150;
+// Converte "2026-03-26" (ano-mês-dia) em "26/03/2026"
+function formatarData(data = null) {
+    if (!data) return 'Não informada';
+    const [ano, mes, dia] = data.split('-');
+    return `${dia}/${mes}/${ano}`;
 }
 
-window.addEventListener("scroll", atualizarBotaoTopo, {
-    passive: true
-});
-
-// Retorna ao início da página ao clicar.
-botaoTopo.addEventListener("click", () => {
-    const prefereMovimentoReduzido = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    window.scrollTo({
-        top: 0,
-        behavior: prefereMovimentoReduzido ? "auto" : "smooth"
-    });
-});
-
-// Verifica a posição inicial da página.
-atualizarBotaoTopo();
-
-/*
- * 3. FORMULÁRIO DE CONTATO DEMONSTRATIVO
- * Não envia nem armazena dados.
- */
-
-const formularioContato = document.querySelector("#form-contato");
-
-if (formularioContato) {
-    const resultadoContato = document.querySelector("#resultado-contato");
-
-    formularioContato.addEventListener("submit", (evento) => {
-        evento.preventDefault();
-
-        if (resultadoContato) {
-            resultadoContato.textContent =
-                "Demonstração concluída! Nenhuma mensagem foi enviada " +
-                "ou armazenada. Este formulário existe somente para fins acadêmicos.";
-
-            resultadoContato.hidden = false;
-        }
-
-        formularioContato.reset();
-    });
+// Link da página de detalhe de um trabalho, a partir do id
+function urlDoTrabalho(trabalho) {
+    return `pagina.html?id=${encodeURIComponent(trabalho.id)}`;
 }
 
-/* =========================================
-   ACERVO DE PRODUÇÕES
-========================================= */
+// Número do trabalho (01, 02...) conforme a posição no array
+function numeroDoTrabalho(trabalho) {
+    return String(trabalhos.indexOf(trabalho) + 1).padStart(2, '0');
+}
 
-const listaTrabalhos = document.getElementById("lista-trabalhos");
+function criarMenu(paginaAtual = '') {
+    const nav = document.querySelector('#menu-principal');
+    if (!nav) return;
 
-if (listaTrabalhos && typeof trabalhos !== "undefined") {
+    nav.innerHTML = itensMenu.map(item => `
+        <a href="${item.href}" ${item.pagina === paginaAtual ? 'aria-current="page"' : ''}>
+            ${item.texto}
+        </a>
+    `).join('');
+}
 
-    const campoBusca = document.getElementById("busca-trabalhos");
-    const filtroTipo = document.getElementById("filtro-tipo");
-    const filtroAutor = document.getElementById("filtro-autor");
-    const filtroModalidade = document.getElementById("filtro-modalidade");
-    const totalTrabalhos = document.getElementById("total-trabalhos");
-    const mensagemVazia = document.getElementById("mensagem-vazia");
 
-    const normalizarTexto = (texto = "") => {
-        return texto
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    };
+function configurarNavegacao() {
+    const botao = document.querySelector('#menu-toggle');
+    const nav = document.querySelector('#menu-principal');
 
-    function criarCard(trabalho) {
+    if (!botao || !nav) return;
 
-        const autores = trabalho.autores.length
-            ? trabalho.autores.join(", ")
-            : "Autoria não informada";
+    const icone = botao.querySelector('span');
 
-        const tipo = {
-            conto: "Conto",
-            resenha: "Resenha",
-            cordel: "Cordel",
-            apresentacao: "Apresentação"
-        };
+    function abrirMenu() {
+        nav.classList.add('is-open');
+        botao.setAttribute('aria-expanded', 'true');
+        botao.setAttribute('aria-label', 'Fechar menu');
 
-        return `
-            <article class="card" data-trabalho="${trabalho.id}">
-
-                <a href="${trabalho.pagina}" class="card-image-link">
-                    <img
-                        src="${trabalho.imagem.src}"
-                        alt="${trabalho.imagem.alt}"
-                        loading="lazy"
-                    >
-                </a>
-
-                <div class="card-content">
-
-                    <span class="card-number">
-                        Trabalho ${String(trabalho.id).padStart(2, "0")}
-                        · ${tipo[trabalho.tipo] || trabalho.tipo}
-                    </span>
-
-                    <h3>${trabalho.titulo}</h3>
-
-                    <p>${trabalho.resumo}</p>
-
-                    <p class="work-author">
-                        <strong>Autoria:</strong> ${autores}
-                    </p>
-
-                    <p class="work-modality">
-                        <strong>Modalidade:</strong>
-                        ${trabalho.modalidade === "grupo" ? "Em grupo" : "Individual"}
-                    </p>
-
-                    <a href="${trabalho.pagina}" class="read-more">
-                        Ler trabalho →
-                    </a>
-
-                </div>
-
-            </article>
-        `;
+        if (icone) icone.textContent = '×';
     }
 
-    function filtrarTrabalhos() {
+    function fecharMenu(devolverFoco = false) {
+        nav.classList.remove('is-open');
+        botao.setAttribute('aria-expanded', 'false');
+        botao.setAttribute('aria-label', 'Abrir menu');
 
-        const busca = normalizarTexto(campoBusca.value.trim());
-        const tipoSelecionado = filtroTipo.value;
-        const autorSelecionado = filtroAutor.value;
-        const modalidadeSelecionada = filtroModalidade.value;
+        if (icone) icone.textContent = '☰';
+
+        if (devolverFoco) botao.focus();
+    }
+
+    // Abrir e fechar pelo botão
+    botao.addEventListener('click', () => {
+        const aberto = botao.getAttribute('aria-expanded') === 'true';
+
+        if (aberto) {
+            fecharMenu();
+        } else {
+            abrirMenu();
+        }
+    });
+
+    // Fechar ao selecionar uma página
+    nav.addEventListener('click', evento => {
+        if (evento.target.closest('a')) {
+            fecharMenu();
+        }
+    });
+
+    // Fechar ao pressionar ESC
+    document.addEventListener('keydown', evento => {
+        if (
+            evento.key === 'Escape' &&
+            botao.getAttribute('aria-expanded') === 'true'
+        ) {
+            fecharMenu(true);
+        }
+    });
+
+    // Fechar o menu ao voltar para a versão desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) {
+            fecharMenu();
+        }
+    });
+}
+
+
+function configurarTema() {
+    const botao = document.querySelector('#theme-toggle');
+    if (!botao) return;
+
+    const temaSalvo = localStorage.getItem('caderno-tema');
+    if (temaSalvo === 'claro') document.documentElement.dataset.theme = 'claro';
+
+    const atualizarRotulo = () => {
+        const claro = document.documentElement.dataset.theme === 'claro';
+        botao.textContent = claro ? 'Tema escuro' : 'Tema claro';
+        botao.setAttribute('aria-pressed', String(claro));
+    };
+
+    atualizarRotulo();
+    botao.addEventListener('click', () => {
+        const vaiFicarClaro = document.documentElement.dataset.theme !== 'claro';
+        if (vaiFicarClaro) {
+            document.documentElement.dataset.theme = 'claro';
+            localStorage.setItem('caderno-tema', 'claro');
+        } else {
+            delete document.documentElement.dataset.theme;
+            localStorage.setItem('caderno-tema', 'escuro');
+        }
+        atualizarRotulo();
+    });
+}
+
+function criarCard(trabalho) {
+    const autores = trabalho.autores.length
+        ? trabalho.autores.join(', ')
+        : 'Autoria não informada';
+    const modalidade = trabalho.modo === 'grupo' ? 'Em grupo' : 'Individual';
+
+    return `
+        <article class="work-card">
+            <a class="work-card__image" href="${urlDoTrabalho(trabalho)}" aria-label="Abrir ${escaparHTML(trabalho.titulo)}">
+                <img src="${escaparHTML(trabalho.imagem.src)}" alt="${escaparHTML(trabalho.imagem.alt)}" loading="lazy">
+            </a>
+            <div class="work-card__body">
+                <div class="work-card__eyebrow">Trabalho ${numeroDoTrabalho(trabalho)} · ${tipoLabel[trabalho.tipo] || escaparHTML(trabalho.tipo)}</div>
+                <h3><a href="${urlDoTrabalho(trabalho)}">${escaparHTML(trabalho.titulo)}</a></h3>
+                <p>${escaparHTML(trabalho.resumo)}</p>
+                <dl class="work-card__meta">
+                    <div><dt>Autoria</dt><dd>${escaparHTML(autores)}</dd></div>
+                    <div><dt>Modalidade</dt><dd>${modalidade}</dd></div>
+                </dl>
+                <a class="text-link" href="${urlDoTrabalho(trabalho)}">Ler produção <span aria-hidden="true">→</span></a>
+            </div>
+        </article>
+    `;
+}
+
+function preencherFiltroAutores(select) {
+    if (!select) return;
+    const autores = [...new Set(trabalhos.flatMap(item => item.autores))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    select.innerHTML = '<option value="todos">Todos os autores</option>' + autores
+        .map(autor => `<option value="${escaparHTML(autor)}">${escaparHTML(autor)}</option>`).join('');
+}
+
+function iniciarAcervo() {
+    const lista = document.querySelector('#lista-trabalhos');
+    if (!lista) return;
+
+    const busca = document.querySelector('#busca-trabalhos');
+    const tipo = document.querySelector('#filtro-tipo');
+    const autor = document.querySelector('#filtro-autor');
+    const modalidade = document.querySelector('#filtro-modalidade');
+    const contador = document.querySelector('#total-trabalhos');
+    const vazio = document.querySelector('#mensagem-vazia');
+
+    preencherFiltroAutores(autor);
+
+    const parametros = new URLSearchParams(window.location.search);
+    const tipoInicial = parametros.get('tipo');
+    if (tipoInicial && tipo && [...tipo.options].some(opcao => opcao.value === tipoInicial)) {
+        tipo.value = tipoInicial;
+    }
+
+    function filtrar() {
+        const termo = normalizar(busca?.value.trim() || '');
+        const tipoEscolhido = tipo?.value || 'todos';
+        const autorEscolhido = autor?.value || 'todos';
+        const modalidadeEscolhida = modalidade?.value || 'todos';
 
         const resultados = trabalhos.filter(trabalho => {
-
-            const conteudo = normalizarTexto([
-                trabalho.titulo,
-                trabalho.resumo,
-                trabalho.tipo,
-                ...trabalho.autores
-            ].join(" "));
-
-            const correspondeBusca = conteudo.includes(busca);
-
-            const correspondeTipo =
-                tipoSelecionado === "todos" ||
-                trabalho.tipo === tipoSelecionado;
-
-            const correspondeAutor =
-                autorSelecionado === "todos" ||
-                trabalho.autores.includes(autorSelecionado);
-
-            const correspondeModalidade =
-                modalidadeSelecionada === "todos" ||
-                trabalho.modalidade === modalidadeSelecionada;
-
-            return (
-                correspondeBusca &&
-                correspondeTipo &&
-                correspondeAutor &&
-                correspondeModalidade
-            );
+            const textoCompleto = normalizar([
+                trabalho.titulo, trabalho.resumo, trabalho.conteudo,
+                trabalho.tipo, trabalho.grupo, ...trabalho.autores
+            ].join(' '));
+            const combinaBusca = textoCompleto.includes(termo);
+            const combinaTipo = tipoEscolhido === 'todos' || trabalho.tipo === tipoEscolhido;
+            const combinaAutor = autorEscolhido === 'todos' || trabalho.autores.includes(autorEscolhido);
+            const combinaModalidade = modalidadeEscolhida === 'todos' || trabalho.modo === modalidadeEscolhida;
+            return combinaBusca && combinaTipo && combinaAutor && combinaModalidade;
         });
 
-        listaTrabalhos.innerHTML = resultados
-            .map(criarCard)
-            .join("");
-
-        totalTrabalhos.textContent =
-            `${resultados.length} ${resultados.length === 1 ? "produção encontrada" : "produções encontradas"}`;
-
-        mensagemVazia.hidden = resultados.length !== 0;
+        lista.innerHTML = resultados.map(criarCard).join('');
+        if (contador) contador.textContent = `${resultados.length} ${resultados.length === 1 ? 'produção encontrada' : 'produções encontradas'}`;
+        if (vazio) vazio.hidden = resultados.length !== 0;
     }
 
-    campoBusca.addEventListener("input", filtrarTrabalhos);
-    filtroTipo.addEventListener("change", filtrarTrabalhos);
-    filtroAutor.addEventListener("change", filtrarTrabalhos);
-    filtroModalidade.addEventListener("change", filtrarTrabalhos);
-
-    filtrarTrabalhos();
+    [busca, tipo, autor, modalidade].forEach(controle => {
+        if (controle) controle.addEventListener(controle === busca ? 'input' : 'change', filtrar);
+    });
+    filtrar();
 }
-/* =========================================
-   4. PÁGINAS DE CATEGORIAS
-   Gera automaticamente os trabalhos de cada gênero.
-========================================= */
 
-const listaCategoria = document.getElementById(
-    "lista-trabalhos-categoria"
-);
-
-if (listaCategoria && typeof trabalhos !== "undefined") {
-
-    const campoBuscaCategoria = document.getElementById(
-        "busca-trabalhos"
-    );
-
-    const contadorCategoria = document.getElementById(
-        "total-trabalhos-categoria"
-    );
-
-    const mensagemVaziaCategoria = document.getElementById(
-        "sem-resultados"
-    );
-
-    // Identifica a categoria pela página atual.
-    const paginaAtual = window.location.pathname
-        .split("/")
-        .pop();
-
-    const categoriasPagina = {
-        "conto.html": "conto",
-        "resenha.html": "resenha",
-        "cordel.html": "cordel",
-        "apresentacoes.html": "apresentacao"
-    };
-
-    const categoriaAtual = categoriasPagina[paginaAtual];
-
-    const normalizarCategoria = (texto = "") => {
-        return texto
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    };
-
-    function criarCardCategoria(trabalho) {
-
-        const autores = trabalho.autores.length
-            ? trabalho.autores.join(", ")
-            : "Autoria não informada";
-
-        const nomesTipos = {
-            conto: "Conto",
-            resenha: "Resenha",
-            cordel: "Cordel",
-            apresentacao: "Apresentação"
-        };
-
-        return `
-            <article class="card" data-trabalho="${trabalho.id}">
-
-                <a href="${trabalho.pagina}" class="card-image-link">
-                    <img
-                        class="work-thumbnail"
-                        src="${trabalho.imagem.src}"
-                        alt="${trabalho.imagem.alt}"
-                        loading="lazy"
-                    >
-                </a>
-
-                <div class="card-content">
-
-                    <div class="card-number">
-                        TRABALHO ${String(trabalho.id).padStart(2, "0")}
-                        · ${nomesTipos[trabalho.tipo] || trabalho.tipo}
-                    </div>
-
-                    <h3>${trabalho.titulo}</h3>
-
-                    <p>${trabalho.resumo}</p>
-
-                    <p class="work-author">
-                        <strong>Autoria:</strong> ${autores}
-                    </p>
-
-                    <a
-                        class="read-more"
-                        href="${trabalho.pagina}"
-                    >
-                        Ler trabalho completo →
-                    </a>
-
-                </div>
-
-            </article>
-        `;
-    }
-
-    function atualizarCategoria() {
-
-        if (!categoriaAtual) return;
-
-        const termo = normalizarCategoria(
-            campoBuscaCategoria.value.trim()
-        );
-
-        const trabalhosCategoria = trabalhos.filter(trabalho => {
-
-            if (trabalho.tipo !== categoriaAtual) {
-                return false;
-            }
-
-            const conteudo = normalizarCategoria([
-                trabalho.titulo,
-                trabalho.resumo,
-                ...trabalho.autores
-            ].join(" "));
-
-            return conteudo.includes(termo);
-        });
-
-        listaCategoria.innerHTML = trabalhosCategoria
-            .map(criarCardCategoria)
-            .join("");
-
-        const quantidade = trabalhosCategoria.length;
-
-        contadorCategoria.textContent =
-            `${quantidade} ${quantidade === 1 ? "trabalho" : "trabalhos"}`;
-
-        mensagemVaziaCategoria.hidden = quantidade !== 0;
-    }
-
-    if (categoriaAtual && campoBuscaCategoria) {
-        campoBuscaCategoria.addEventListener(
-            "input",
-            atualizarCategoria
-        );
-
-        atualizarCategoria();
-    }
+function iniciarDestaques() {
+    const lista = document.querySelector('#trabalhos-destaque');
+    if (!lista) return;
+    lista.innerHTML = trabalhos.slice(0, 3).map(criarCard).join('');
 }
-/* =========================================
-   5. PÁGINA DE APRESENTAÇÕES
-   Carrega os trabalhos de apresentação
-   diretamente do arquivo dados.js.
-========================================= */
 
-const listaApresentacoes = document.getElementById(
-    "lista-apresentacoes"
-);
-
-if (listaApresentacoes && typeof trabalhos !== "undefined") {
-
-    const contadorApresentacoes = document.getElementById(
-        "total-apresentacoes"
-    );
-
-    const mensagemVaziaApresentacoes = document.getElementById(
-        "sem-apresentacoes"
-    );
-
-    function criarApresentacao(trabalho) {
-
-        const autores = trabalho.autores.length
-            ? trabalho.autores.join(", ")
-            : "Autoria não informada";
-
-        return `
-            <article class="featured-report-card">
-
-                <div class="featured-report-visual">
-                    <img
-                        src="${trabalho.imagem.src}"
-                        alt="${trabalho.imagem.alt}"
-                        loading="lazy"
-                    >
-                </div>
-
-                <div class="featured-report-content">
-
-                    <div class="featured-report-tags">
-                        <span>
-                            TRABALHO ${String(trabalho.id).padStart(2, "0")}
-                        </span>
-
-                        <span>APRESENTAÇÃO E ENTREVISTA</span>
-                    </div>
-
-                    <h3 id="featured-title">
-                        ${trabalho.titulo}
-                    </h3>
-
-                    <p class="featured-report-description">
-                        ${trabalho.resumo}
-                    </p>
-
-                    <div class="featured-authors">
-                        <span class="authors-label">REALIZADO POR</span>
-
-                        <p>${autores}</p>
-                    </div>
-
-                    <a
-                        class="featured-report-button"
-                        href="${trabalho.pagina}"
-                    >
-                        <span>Ler a reportagem completa</span>
-                        <span aria-hidden="true">→</span>
-                    </a>
-
-                </div>
-
-            </article>
-        `;
-    }
-
-    function carregarApresentacoes() {
-
-        const apresentacoes = trabalhos.filter(
-            trabalho => trabalho.tipo === "apresentacao"
-        );
-
-        listaApresentacoes.innerHTML = apresentacoes
-            .map(criarApresentacao)
-            .join("");
-
-        const quantidade = apresentacoes.length;
-
-        contadorApresentacoes.textContent =
-            `${quantidade} ${quantidade === 1 ? "trabalho" : "trabalhos"}`;
-
-        mensagemVaziaApresentacoes.hidden = quantidade !== 0;
-    }
-
-    carregarApresentacoes();
+function iniciarCategorias() {
+    const lista = document.querySelector('#categorias-lista');
+    if (!lista) return;
+    const categorias = [
+        { tipo: 'conto', nome: 'Contos', descricao: 'Narrativas autorais e histórias de ficção.', imagem: 'img/gerais/espreitador.jpg' },
+        { tipo: 'resenha', nome: 'Resenhas', descricao: 'Leituras, análises e opiniões sobre livros.', imagem: 'img/gerais/resenha_l.jpg' },
+        { tipo: 'cordel', nome: 'Cordéis', descricao: 'Versos, cultura popular e reflexão social.', imagem: 'img/gerais/cordel.jpg' },
+        { tipo: 'apresentacao', nome: 'Apresentações', descricao: 'Trabalhos orais, entrevistas e materiais audiovisuais.', imagem: 'img/cinema/o_cinema_brasileiro_nossa_historia.jpg' }
+    ];
+    lista.innerHTML = categorias.map(categoria => {
+        const quantidade = trabalhos.filter(item => item.tipo === categoria.tipo).length;
+        return `<a class="category-tile" href="acervo.html?tipo=${categoria.tipo}">
+            <img src="${categoria.imagem}" alt="" loading="lazy">
+            <span class="category-tile__content"><strong>${categoria.nome}</strong><small>${categoria.descricao}</small><em>${quantidade} ${quantidade === 1 ? 'produção' : 'produções'} →</em></span>
+        </a>`;
+    }).join('');
 }
+
+function iniciarDetalhe() {
+    const destino = document.querySelector('#detalhe-trabalho');
+    if (!destino) return;
+
+    const id = new URLSearchParams(window.location.search).get('id');
+    const trabalho = trabalhos.find(item => item.id === id);
+
+    if (!trabalho) {
+        destino.innerHTML = `<section class="empty-panel"><h1>Produção não encontrada</h1><p>Confira o endereço ou volte ao acervo para escolher outro trabalho.</p><a class="button" href="acervo.html">Voltar ao acervo</a></section>`;
+        document.title = 'Produção não encontrada | Caderno de Letras';
+        return;
+    }
+
+    const autores = trabalho.autores.join(', ') || 'Autoria não informada';
+    const modalidade = trabalho.modo === 'grupo' ? 'Produção em grupo' : 'Produção individual';
+    const imagemPrincipal = `<figure class="detail-cover"><img src="${escaparHTML(trabalho.imagem.src)}" alt="${escaparHTML(trabalho.imagem.alt)}"><figcaption>${escaparHTML(trabalho.imagem.legenda || '')}</figcaption></figure>`;
+    const video = trabalho.video?.src ? `
+        <section class="detail-video" aria-labelledby="video-titulo">
+            <div class="eyebrow">Material audiovisual</div>
+            <h2 id="video-titulo">Assista à apresentação</h2>
+            <div class="video-frame"><iframe src="${escaparHTML(trabalho.video.src)}" title="${escaparHTML(trabalho.video.titulo || trabalho.titulo)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </section>` : '';
+    const links = trabalho.links.length ? `
+        <section class="detail-links" aria-labelledby="links-titulo"><h2 id="links-titulo">Materiais complementares</h2><ul>${trabalho.links.map(link => `<li><a href="${escaparHTML(link.url)}" target="_blank" rel="noopener noreferrer">${escaparHTML(link.texto)}</a></li>`).join('')}</ul></section>` : '';
+
+    destino.innerHTML = `
+        <a class="back-link" href="acervo.html">← Voltar ao acervo</a>
+        <header class="detail-heading">
+            <div class="eyebrow">Trabalho ${numeroDoTrabalho(trabalho)} · ${tipoLabel[trabalho.tipo] || escaparHTML(trabalho.tipo)}</div>
+            <h1>${escaparHTML(trabalho.titulo)}</h1>
+            <div class="detail-meta">
+                <p><strong>Autoria:</strong> ${escaparHTML(autores)}</p>
+                <p><strong>Grupo produtor:</strong> ${escaparHTML(trabalho.grupo || 'Não informado')}</p>
+                <p><strong>Modalidade:</strong> ${modalidade}</p>
+                <p><strong>Data:</strong> ${escaparHTML(formatarData(trabalho.data))}</p>
+            </div>
+            <p class="detail-summary">${escaparHTML(trabalho.resumo)}</p>
+        </header>
+        ${imagemPrincipal}
+        <article class="article-body" aria-label="Texto completo da produção">${trabalho.conteudo}</article>
+        ${video}
+        ${links}
+    `;
+    document.title = `${trabalho.titulo} | Caderno de Letras`;
+}
+
+function configurarVoltarTopo() {
+    const botao = document.querySelector('#voltar-topo');
+    if (!botao) return;
+    const atualizar = () => { botao.hidden = window.scrollY < 280; };
+    window.addEventListener('scroll', atualizar, { passive: true });
+    atualizar();
+    botao.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pagina = document.body.dataset.page || '';
+
+    // Configura primeiro o botão do menu
+    configurarNavegacao();
+
+    // Depois cria os links
+    criarMenu(pagina);
+
+    configurarTema();
+    iniciarDestaques();
+    iniciarCategorias();
+    iniciarAcervo();
+    iniciarDetalhe();
+    configurarVoltarTopo();
+});

@@ -9,6 +9,8 @@
     <title>Caderno de Letras — Portfólio de Língua Portuguesa</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -25,7 +27,22 @@
                 Leituras, ideias e produções escolares
             </p>
 
-            <nav class="nav" aria-label="Navegação principal">
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Abrir menu"
+                aria-controls="menu-principal"
+                aria-expanded="false"
+            >
+                <span aria-hidden="true">☰</span>
+            </button>
+
+            <nav
+                class="nav"
+                id="menu-principal"
+                aria-label="Navegação principal"
+            >
                 <a href="index.html" aria-current="page">Início</a>
                 <a href="acervo.html">Acervo</a>
                 <a href="conto.html">Conto</a>
@@ -38,6 +55,7 @@
 
         </div>
     </header>
+
 
     <main>
 
@@ -70,7 +88,7 @@
             </h2>
 
             <p class="section-intro">
-                Por enquanto, o acervo começa com quatro trabalhos. Novas
+                Por enquanto, o acervo reúne os trabalhos do grupo Royal Code. Novas
                 produções dos integrantes do grupo poderão ser adicionadas
                 às mesmas categorias.
             </p>

@@ -10,36 +10,54 @@
     <title>Apresentações e entrevistas | Caderno de Letras</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
     <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
-<body id="topo">
+<body id="topo" data-page="apresentacoes">
 
-    <header>
-        <div class="header-inner">
-            <a class="brand" href="index.html">
-                Caderno<span> de Letras</span>
+<header>
+    <div class="header-inner">
+
+        <a class="brand" href="index.html">
+            Caderno<span> de Letras</span>
+        </a>
+
+        <p class="tagline">
+            Leituras, ideias e produções escolares
+        </p>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Abrir menu"
+            aria-controls="menu-principal"
+            aria-expanded="false"
+        >
+            <span aria-hidden="true">☰</span>
+        </button>
+
+        <nav
+            class="nav"
+            id="menu-principal"
+            aria-label="Navegação principal"
+        >
+            <a href="index.html">Início</a>
+            <a href="acervo.html">Acervo</a>
+            <a href="conto.html">Conto</a>
+            <a href="resenha.html">Resenha literária</a>
+            <a href="cordel.html">Cordel</a>
+            <a href="apresentacoes.html" aria-current="page">
+                Apresentação e entrevista
             </a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+        </nav>
 
-            <p class="tagline">
-                Leituras, ideias e produções escolares
-            </p>
-
-            <nav class="nav" aria-label="Navegação principal">
-                <a href="index.html">Início</a>
-                <a href="acervo.html">Acervo</a>
-                <a href="conto.html">Conto</a>
-                <a href="resenha.html">Resenha literária</a>
-                <a href="cordel.html">Cordel</a>
-                <a href="apresentacoes.html" aria-current="page">
-                    Apresentação e entrevista
-                </a>
-                <a href="sobre.html">Sobre</a>
-                <a href="contato.html">Contato</a>
-            </nav>
-        </div>
-    </header>
+    </div>
+</header>
 
     <main class="presentation-page">
 
@@ -91,19 +109,28 @@
                         DESTAQUE DA CATEGORIA
                     </span>
 
-                    <h2>Uma reportagem para explorar</h2>
+                    <h2 id="featured-title">
+                        Uma reportagem para explorar
+                    </h2>
                 </div>
 
-                <span class="featured-status" id="total-apresentacoes">
-                    1 trabalho
+                <span class="featured-status" id="total-trabalhos">
+                    0 trabalhos
                 </span>
             </div>
 
-            <!-- Trabalho gerado automaticamente -->
-            <div id="lista-apresentacoes"></div>
+            <!-- Filtro automático da categoria -->
+            <select id="filtro-tipo" hidden>
+                <option value="todos">Todas as categorias</option>
+                <option value="apresentacao" selected>Apresentações</option>
+            </select>
 
+            <!-- Trabalhos gerados automaticamente -->
+            <div class="cards" id="lista-trabalhos"></div>
+
+            <!-- Mensagem exibida quando não há resultados -->
             <p
-                id="sem-apresentacoes"
+                id="mensagem-vazia"
                 class="empty-state"
                 role="status"
                 aria-live="polite"

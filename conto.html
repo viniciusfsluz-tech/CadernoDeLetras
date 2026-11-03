@@ -1,23 +1,57 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Histórias narrativas reunidas em um só lugar. Aqui ficarão os contos produzidos por você e pelos integrantes do grupo.">
+
+    <meta
+        name="description"
+        content="Histórias narrativas reunidas em um só lugar. Aqui ficarão os contos produzidos por você e pelos integrantes do grupo."
+    >
+
+    <meta name="theme-color" content="#090d18">
+
     <title>Contos | Caderno de Letras</title>
+
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
     <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
-<body id="topo">
+<body id="topo" data-page="conto">
+
+    <!-- CABEÇALHO -->
+
     <header>
         <div class="header-inner">
-            <a class="brand" href="index.html">Caderno<span> de Letras</span></a>
-            <p class="tagline">Leituras, ideias e produções escolares</p>
 
-            <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html">
+                Caderno<span> de Letras</span>
+            </a>
+
+            <p class="tagline">
+                Leituras, ideias e produções escolares
+            </p>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Abrir menu"
+                aria-controls="menu-principal"
+                aria-expanded="false"
+            >
+                <span aria-hidden="true">☰</span>
+            </button>
+
+            <nav
+                class="nav"
+                id="menu-principal"
+                aria-label="Navegação principal"
+            >
                 <a href="index.html">Início</a>
                 <a href="acervo.html">Acervo</a>
                 <a href="conto.html" aria-current="page">Conto</a>
@@ -27,32 +61,68 @@
                 <a href="sobre.html">Sobre</a>
                 <a href="contato.html">Contato</a>
             </nav>
+
         </div>
     </header>
 
+    <!-- CONTEÚDO PRINCIPAL -->
+
     <main>
-        <a class="back-link" href="index.html">← Voltar às categorias</a>
+
+        <a class="back-link" href="index.html">
+            ← Voltar às categorias
+        </a>
+
+        <!-- APRESENTAÇÃO DA CATEGORIA -->
 
         <section class="category-heading">
-            <div class="eyebrow">Gênero textual · Narrativas</div>
-            <h1>Contos</h1>
-            <p>Histórias narrativas reunidas em um só lugar. Aqui ficarão os contos produzidos por você e pelos integrantes do grupo.</p>
-        </section>
 
-        <section class="category-works">
-            <div class="section-topline">
-                <div>
-                    <div class="eyebrow">Acervo atual</div>
-                    <h2 class="section-heading">Trabalhos nesta categoria</h2>
-                </div>
-
-                <span class="work-count" id="total-trabalhos-categoria">
-                    4 trabalhos
-                </span>
+            <div class="eyebrow">
+                Gênero textual · Narrativas
             </div>
 
+            <h1>Contos</h1>
+
+            <p>
+                Histórias narrativas reunidas em um só lugar.
+                Aqui ficarão os contos produzidos por você e
+                pelos integrantes do grupo.
+            </p>
+
+        </section>
+
+        <!-- TRABALHOS DA CATEGORIA -->
+
+        <section class="category-works">
+
+            <div class="section-topline">
+
+                <div>
+                    <div class="eyebrow">
+                        Acervo atual
+                    </div>
+
+                    <h2 class="section-heading">
+                        Trabalhos nesta categoria
+                    </h2>
+                </div>
+
+                <span
+                    class="work-count"
+                    id="total-trabalhos"
+                >
+                    Carregando...
+                </span>
+
+            </div>
+
+            <!-- BUSCA -->
+
             <div class="search-wrap">
-                <label for="busca-trabalhos">Buscar um conto</label>
+
+                <label for="busca-trabalhos">
+                    Buscar um conto
+                </label>
 
                 <input
                     type="search"
@@ -60,12 +130,28 @@
                     placeholder="Digite o título ou uma palavra do conto..."
                     autocomplete="off"
                 >
+
             </div>
 
-            <div class="cards" id="lista-trabalhos-categoria"></div>
+            <!-- FILTRO AUTOMÁTICO DA CATEGORIA -->
+
+            <select id="filtro-tipo" hidden>
+                <option value="todos">Todas as categorias</option>
+                <option value="conto" selected>Contos</option>
+            </select>
+
+            <!-- LISTA DINÂMICA -->
+
+            <div
+                class="cards"
+                id="lista-trabalhos"
+            >
+            </div>
+
+            <!-- MENSAGEM DE PESQUISA VAZIA -->
 
             <p
-                id="sem-resultados"
+                id="mensagem-vazia"
                 class="empty-state"
                 role="status"
                 aria-live="polite"
@@ -78,12 +164,27 @@
             <p class="future-note">
                 Mais trabalhos desta categoria poderão ser adicionados aqui.
             </p>
+
         </section>
+
     </main>
 
+    <!-- RODAPÉ -->
+
     <footer>
-        <p><strong>Caderno de Letras</strong> · Portfólio de Língua Portuguesa</p>
-        <p><a href="#topo">Voltar ao topo ↑</a></p>
+
+        <p>
+            <strong>Caderno de Letras</strong>
+            · Portfólio de Língua Portuguesa
+        </p>
+
+        <p>
+            <a href="#topo">
+                Voltar ao topo ↑
+            </a>
+        </p>
+
     </footer>
+
 </body>
 </html>

@@ -10,34 +10,54 @@
     >
 
     <title>Sobre — Caderno de Letras</title>
-
+    
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
+    <script src="js/dados.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
-<body id="topo">
+<body id="topo" data-page="sobre">
 
-    <header>
-        <div class="header-inner">
-            <a class="brand" href="index.html">
-                Caderno<span> de Letras</span>
-            </a>
+<header>
+    <div class="header-inner">
 
-            <p class="tagline">Leituras, ideias e produções escolares</p>
+        <a class="brand" href="index.html">
+            Caderno<span> de Letras</span>
+        </a>
 
-            <nav class="nav" aria-label="Navegação principal">
-                <a href="index.html">Início</a>
-                <a href="acervo.html">Acervo</a>
-                <a href="conto.html">Conto</a>
-                <a href="resenha.html">Resenha literária</a>
-                <a href="cordel.html">Cordel</a>
-                <a href="apresentacoes.html">Apresentação e entrevista</a>
-                <a href="sobre.html" aria-current="page">Sobre</a>
-                <a href="contato.html">Contato</a>
-            </nav>
-        </div>
-    </header>
+        <p class="tagline">
+            Leituras, ideias e produções escolares
+        </p>
 
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Abrir menu"
+            aria-controls="menu-principal"
+            aria-expanded="false"
+        >
+            <span aria-hidden="true">☰</span>
+        </button>
+
+        <nav
+            class="nav"
+            id="menu-principal"
+            aria-label="Navegação principal"
+        >
+            <a href="index.html">Início</a>
+            <a href="acervo.html">Acervo</a>
+            <a href="conto.html">Conto</a>
+            <a href="resenha.html">Resenha literária</a>
+            <a href="cordel.html">Cordel</a>
+            <a href="apresentacoes.html">Apresentação e entrevista</a>
+            <a href="sobre.html" aria-current="page">Sobre</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+
+    </div>
+</header>
     <main>
         <section class="category-heading">
             <div class="eyebrow">Conheça o projeto</div>
