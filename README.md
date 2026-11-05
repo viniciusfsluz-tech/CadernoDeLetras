@@ -9,11 +9,14 @@ Autores dos trabalhos: Vinícius Ferreira, Luis Gustavo, Ruan Silva e Gabriel Ma
 
 | Integrante | Papel | Grupo que representa |
 |---|---|---|
-| Vinícius Ferreira | Representante do grupo na Equipe do Portal | Royal Code |
+| Vinícius Ferreira | Programação do site (HTML, JS e CSS) e representante do grupo na Equipe do Portal | Royal Code |
+| Luis Gustavo | Imagens e confirmação das fontes | Royal Code |
+| Ruan Silva | Parte visual (CSS) | Royal Code |
+| Gabriel Mariano | Pesquisa geral dos temas e imagens | Royal Code |
 
 ## Turma e campus
 
-IFSP, campus Cubatão · Turma 148 · ano letivo 2026
+IFSP, campus Cubatão · Turma 148 · ano letivo 2026 · Língua Portuguesa (profa. Fabiana) e Práticas de Laboratório (prof. Nelson)
 
 ## Link do portal publicado (GitHub Pages)
 
@@ -28,12 +31,14 @@ Dê um duplo clique em `index.html`. Não precisa de servidor.
 ```
 index.html  acervo.html  pagina.html  conto.html  resenha.html  cordel.html
 apresentacoes.html  sobre.html  contato.html
-css/style.css        estilos, paleta (variáveis) e layout
-js/config.js         configurações do site e itens do menu
+css/style.css        estilos, paleta (variáveis, tema escuro e claro) e layout
+js/config.js         configurações do site e itens do menu (array itensMenu)
 js/dados.js          array com todos os trabalhos
 js/main.js           menu, cartões, filtros, busca, página de detalhe e tema
 img/                 imagens (contos, resenhas, cordel, cinema, gerais)
 ```
+
+`pagina.html?id=...` mostra qualquer trabalho a partir do seu `id`.
 
 ## Como cadastrar um trabalho (`js/dados.js`)
 
@@ -47,12 +52,24 @@ img/                 imagens (contos, resenhas, cordel, cinema, gerais)
     grupo: "Royal Code",
     data: "2026-03-26",            // ano-mês-dia
     resumo: "Uma ou duas frases.",
-    conteudo: "<p>Texto em HTML...</p>",
+    texto: ["Parágrafo 1", "Parágrafo 2"],
     imagem: { src: "img/contos/arquivo.jpg", alt: "Descrição da imagem", legenda: "Legenda da imagem" },
     video: null,                   // ou { src: "https://www.youtube.com/embed/CODIGO", titulo: "..." }
     links: [{ texto: "Fonte consultada", url: "https://..." }]
 }
 ```
+
+Convenções dentro de `texto` (cada item do array é um bloco):
+
+| Bloco | Resultado |
+|---|---|
+| `"Texto"` | parágrafo |
+| `"Verso 1\nVerso 2"` | versos (as quebras de linha são mantidas) |
+| `"## Título"` / `"### Título"` | subtítulos |
+| `"> citação"` | citação |
+| `"- item"` | item de lista (itens seguidos formam uma lista) |
+| `"![descrição](img/arquivo.jpg) legenda"` | imagem com texto alternativo e legenda |
+| `**negrito**`, `*itálico*` | destaques (use `\*` para um asterisco literal) |
 
 Nomes de arquivos de imagem: minúsculas, sem acentos e sem espaços (ex.: `poema_ana.jpg`), com cerca de até 1 MB.
 
@@ -110,3 +127,11 @@ Nomes de arquivos de imagem: minúsculas, sem acentos e sem espaços (ex.: `poem
 
 - Casa de Cinema de Porto Alegre, "A lista das listas de melhores filmes brasileiros", de Jorge Furtado, 15/05/2026: https://www.casacinepoa.com.br/blog/2026-05-15-a-lista-das-listas-de-melhores-filmes-brasileiros/
 - Letterboxd: https://letterboxd.com
+
+**Textos de terceiros citados nos cordéis:** Declaração Universal dos Direitos Humanos (ONU), em português: https://unric.org/pt/wp-content/uploads/sites/9/2023/10/PT-UDHR-v2023_web.pdf
+
+## Pendências antes da entrega
+
+- Os cartazes de filmes e as capas de livros não têm licença de reutilização (só uso escolar). Se possível, trocar por imagens próprias ou de licença livre (Wikimedia Commons, Unsplash).
+- Adicionar vídeo em outros trabalhos, se houver (campo `video`).
+- Todos os integrantes da Equipe do Portal devem ter commits no repositório.

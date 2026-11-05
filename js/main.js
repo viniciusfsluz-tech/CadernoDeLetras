@@ -38,12 +38,78 @@ function numeroDoTrabalho(trabalho) {
     return String(trabalhos.indexOf(trabalho) + 1).padStart(2, '0');
 }
 
+/* ---------- Texto do trabalho: array de blocos -> HTML ---------- */
+/*
+ * Convenções dos blocos (veja o cabeçalho de dados.js):
+ *   "## Título", "### Título"  subtítulos        "- item"  itens seguidos viram <ul>
+ *   "> citação"                 citação           "![alt](src) legenda"  imagem
+ *   texto com "\n"              versos (mantém as quebras de linha)
+ *   **negrito**, *itálico*      dentro do texto; "\*" é um asterisco literal
+ */
+function formatarInline(texto) {
+    return escaparHTML(texto)
+        .replace(/\\\*/g, '\u0000')                       // \* -> asterisco literal (guardado)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\u0000/g, '*');
+}
+
+function renderizarTexto(blocos) {
+    let html = '';
+    let lista = [];
+
+    const fecharLista = () => {
+        if (lista.length) html += `<ul>${lista.map(item => `<li>${formatarInline(item)}</li>`).join('')}</ul>`;
+        lista = [];
+    };
+
+    blocos.forEach(bloco => {
+        const imagem = bloco.match(/^!\[(.*?)\]\((.+?)\)\s*(.*)$/);
+
+        if (bloco.startsWith('- ')) {
+            lista.push(bloco.slice(2));
+            return;
+        }
+        fecharLista();
+
+        if (imagem) {
+            const [, alt, src, legenda] = imagem;
+            html += `<figure><img src="${escaparHTML(src)}" alt="${escaparHTML(alt)}" loading="lazy">${legenda ? `<figcaption>${formatarInline(legenda)}</figcaption>` : ''}</figure>`;
+        } else if (bloco.startsWith('## ')) {
+            html += `<h2>${formatarInline(bloco.slice(3))}</h2>`;
+        } else if (bloco.startsWith('### ')) {
+            html += `<h3>${formatarInline(bloco.slice(4))}</h3>`;
+        } else if (bloco.startsWith('> ')) {
+            html += `<blockquote>${formatarInline(bloco.slice(2))}</blockquote>`;
+        } else if (bloco.includes('\n')) {
+            html += `<p class="verso">${formatarInline(bloco)}</p>`;
+        } else {
+            html += `<p>${formatarInline(bloco)}</p>`;
+        }
+    });
+    fecharLista();
+    return html;
+}
+
+// Texto sem marcadores, usado na busca (assim "strong" ou "br" não encontram nada)
+const textoPuro = trabalho => trabalho.texto
+    .map(bloco => bloco
+        .replace(/^!\[(.*?)\]\(.*?\)/, '$1')
+        .replace(/^(#{2,3}|>|-)\s+/, '')
+        .replace(/\*/g, ''))
+    .join(' ');
+
+
+// Monta o menu a partir do array itensMenu (config.js) e destaca a página atual.
+// A página de detalhe (data-page="trabalho") destaca o item "Acervo".
 function criarMenu(paginaAtual = '') {
     const nav = document.querySelector('#menu-principal');
     if (!nav) return;
 
+    const destaque = paginaAtual === 'trabalho' ? 'acervo' : paginaAtual;
+
     nav.innerHTML = itensMenu.map(item => `
-        <a href="${item.href}" ${item.pagina === paginaAtual ? 'aria-current="page"' : ''}>
+        <a href="${item.href}" ${item.pagina === destaque ? 'aria-current="page"' : ''}>
             ${item.texto}
         </a>
     `).join('');
@@ -113,11 +179,13 @@ function configurarNavegacao() {
 }
 
 
+// Tema claro/escuro. A escolha fica salva no navegador (se ele permitir).
 function configurarTema() {
     const botao = document.querySelector('#theme-toggle');
     if (!botao) return;
 
-    const temaSalvo = localStorage.getItem('caderno-tema');
+    let temaSalvo = null;
+    try { temaSalvo = localStorage.getItem('caderno-tema'); } catch (erro) { /* sem armazenamento: usa o padrão */ }
     if (temaSalvo === 'claro') document.documentElement.dataset.theme = 'claro';
 
     const atualizarRotulo = () => {
@@ -126,15 +194,19 @@ function configurarTema() {
         botao.setAttribute('aria-pressed', String(claro));
     };
 
+    const salvar = valor => {
+        try { localStorage.setItem('caderno-tema', valor); } catch (erro) { /* ignora */ }
+    };
+
     atualizarRotulo();
     botao.addEventListener('click', () => {
         const vaiFicarClaro = document.documentElement.dataset.theme !== 'claro';
         if (vaiFicarClaro) {
             document.documentElement.dataset.theme = 'claro';
-            localStorage.setItem('caderno-tema', 'claro');
+            salvar('claro');
         } else {
             delete document.documentElement.dataset.theme;
-            localStorage.setItem('caderno-tema', 'escuro');
+            salvar('escuro');
         }
         atualizarRotulo();
     });
@@ -199,7 +271,7 @@ function iniciarAcervo() {
 
         const resultados = trabalhos.filter(trabalho => {
             const textoCompleto = normalizar([
-                trabalho.titulo, trabalho.resumo, trabalho.conteudo,
+                trabalho.titulo, trabalho.resumo, textoPuro(trabalho),
                 trabalho.tipo, trabalho.grupo, ...trabalho.autores
             ].join(' '));
             const combinaBusca = textoCompleto.includes(termo);
@@ -283,7 +355,7 @@ function iniciarDetalhe() {
             <p class="detail-summary">${escaparHTML(trabalho.resumo)}</p>
         </header>
         ${imagemPrincipal}
-        <article class="article-body" aria-label="Texto completo da produção">${trabalho.conteudo}</article>
+        <article class="article-body" aria-label="Texto completo da produção">${renderizarTexto(trabalho.texto)}</article>
         ${video}
         ${links}
     `;

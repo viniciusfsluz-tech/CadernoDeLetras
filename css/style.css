@@ -2040,3 +2040,22 @@ body { background: radial-gradient(ellipse at top, color-mix(in srgb, var(--surf
         z-index: 30;
     }
 }
+
+/* Versos (poemas e cordéis): mantêm as quebras de linha do array "texto" de dados.js */
+.article-body .verso {
+    white-space: pre-line;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    line-height: 2;
+}
+
+/* Rodapé e botões do cabeçalho em telas pequenas */
+@media (max-width: 480px) {
+    .header-actions { gap: 6px; }
+    .theme-toggle, .menu-toggle { padding: 8px 10px; font-size: .85rem; }
+}
+
+
+/* Cabeçalho e rodapé acompanham o tema (antes ficavam sempre escuros, mesmo no tema claro) */
+header { background: color-mix(in srgb, var(--bg) 94%, transparent); }
+.site-footer { background: color-mix(in srgb, var(--bg) 82%, transparent); }
