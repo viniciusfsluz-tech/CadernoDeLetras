@@ -40,7 +40,7 @@ a {
 }
 
 a:hover {
-    color: #fff;
+    color: var(--text);
 }
 
 /* ========================================
@@ -97,7 +97,7 @@ header {
 .nav a[aria-current="page"] {
     border-color: var(--line);
     background: var(--surface2);
-    color: #fff;
+    color: var(--text)
 }
 
 /* ========================================
@@ -287,7 +287,7 @@ main {
 }
 
 .article-body {
-    background: rgba(17, 26, 43, .84);
+    background: color-mix(in srgb, var(--surface) 84%, transparent);
     border: 1px solid var(--line);
     border-radius: 18px;
     padding: clamp(20px, 4vw, 44px);
@@ -351,7 +351,7 @@ main {
 }
 
 .contents a:hover {
-    color: #fff;
+    color: var(--text);
     border-color: var(--primary);
 }
 
@@ -1420,7 +1420,7 @@ select:focus-visible {
     padding: 12px 14px;
     border: 1px solid var(--line);
     border-radius: 9px;
-    background: #080d18;
+    background: var(--surface2);
     color: var(--text);
     font: inherit;
 }
@@ -2059,3 +2059,38 @@ body { background: radial-gradient(ellipse at top, color-mix(in srgb, var(--surf
 /* Cabeçalho e rodapé acompanham o tema (antes ficavam sempre escuros, mesmo no tema claro) */
 header { background: color-mix(in srgb, var(--bg) 94%, transparent); }
 .site-footer { background: color-mix(in srgb, var(--bg) 82%, transparent); }
+/* MODO CLARO: ajustes de contraste */
+
+.form-field select option { background: var(--surface); color: var(--text); }
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible { background: var(--surface); }
+
+:root[data-theme="claro"] .search-wrap input { background: var(--surface2); }
+
+:root[data-theme="claro"] .presentation-intro {
+    background:
+        radial-gradient(ellipse at 95% 15%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 42%),
+        linear-gradient(135deg, var(--surface), var(--surface2));
+}
+:root[data-theme="claro"] .presentation-intro h1 span,
+:root[data-theme="claro"] .decoration-number { color: var(--primary); }
+:root[data-theme="claro"] .presentation-intro-footer span,
+:root[data-theme="claro"] .film-visual-label,
+:root[data-theme="claro"] .film-visual-number { color: var(--muted); }
+
+.presentation-page #lista-trabalhos .work-card {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+}
+:root[data-theme="claro"] .presentation-page #lista-trabalhos .work-card .text-link { color: #fff; }
+
+:root[data-theme="claro"] .imagem-filme img { background: var(--surface2); }
+:root[data-theme="claro"] .featured-report-card { box-shadow: 0 12px 28px rgba(24, 34, 56, .10); }
+
+.credito-imagem {
+   display: block;
+   margin-top: 4px;
+   color: var(--muted);
+   font-size: .8rem;
+   font-style: italic;
+}

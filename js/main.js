@@ -331,7 +331,14 @@ function iniciarDetalhe() {
 
     const autores = trabalho.autores.join(', ') || 'Autoria não informada';
     const modalidade = trabalho.modo === 'grupo' ? 'Produção em grupo' : 'Produção individual';
-    const imagemPrincipal = `<figure class="detail-cover"><img src="${escaparHTML(trabalho.imagem.src)}" alt="${escaparHTML(trabalho.imagem.alt)}"><figcaption>${escaparHTML(trabalho.imagem.legenda || '')}</figcaption></figure>`;
+const creditosPorTipo = {
+    conto: 'Capa gerada por inteligência artificial.',
+    cordel: 'Capa gerada por inteligência artificial.',
+    apresentacao: 'Capa gerada por inteligência artificial.',
+    resenha: 'Foto da capa do livro, tirada pelos alunos de exemplar próprio.'
+};
+const creditoImagem = creditosPorTipo[trabalho.tipo] || '';
+const imagemPrincipal = `<figure class="detail-cover"><img src="${escaparHTML(trabalho.imagem.src)}" alt="${escaparHTML(trabalho.imagem.alt)}"><figcaption>${escaparHTML(trabalho.imagem.legenda || '')}${creditoImagem ? ` <span class="credito-imagem">${escaparHTML(creditoImagem)}</span>` : ''}</figcaption></figure>`;
     const video = trabalho.video?.src ? `
         <section class="detail-video" aria-labelledby="video-titulo">
             <div class="eyebrow">Material audiovisual</div>
