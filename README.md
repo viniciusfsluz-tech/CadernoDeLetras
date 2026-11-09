@@ -133,5 +133,3 @@ Nomes de arquivos de imagem: minúsculas, sem acentos e sem espaços (ex.: `poem
 ## Pendências antes da entrega
 
 - Os cartazes de filmes (Google Imagens e Letterboxd) e as capas de livros (fotos de exemplares dos alunos) não têm licença de reutilização: uso escolar, sem fins comerciais. As demais capas foram geradas por IA. A origem de cada imagem está na tabela acima e o crédito aparece na página de cada trabalho.
-- Não há outros vídeos além do YouTube da apresentação de cinema.
-- Os commits são feitos pelo líder do grupo; os demais integrantes constam na tabela de integrantes.
